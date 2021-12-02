@@ -247,4 +247,25 @@ router.post("/reg", fetchUser, async (req, res) => {
   res.json(registeredStudentInfo);
 });
 
+router.get("/searchhostel/:text", async (req, res) => {
+  try {
+    const searchText = req.params.text;
+    const hostels = await hostel.find();
+
+    let res = [];
+
+    hostels.forEach((item) => {
+      if (item.hostelCity === searchText) {
+        console.log(item, searchText);
+        res = item;
+      }
+    });
+
+    console.log(res.length);
+    res.json({ hostels });
+  } catch (err) {
+    res.send(err);
+  }
+});
+
 module.exports = router;

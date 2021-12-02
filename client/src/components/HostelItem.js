@@ -18,7 +18,9 @@ export default function HostelItem(props) {
     hostelCity: props.data.hostelCity,
     hostelPhone: props.data.hostelPhone,
     hostelNoOfRooms: props.data.hostelNoOfRooms,
+    hostelOwner: props.data.hostelOwner,
   };
+  console.log(props.data);
   return (
     <>
       <ViewHostelDetails

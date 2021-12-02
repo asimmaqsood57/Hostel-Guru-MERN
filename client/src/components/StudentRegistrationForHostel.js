@@ -14,12 +14,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function StudentRegistrationForHostel({
   isRegFormOpen,
+  hostelData,
   setisRegFormOpen,
 }) {
   const handleClose = () => {
     setisRegFormOpen(false);
   };
 
+  console.log(hostelData);
   return (
     <div>
       <Dialog
@@ -31,7 +33,10 @@ export default function StudentRegistrationForHostel({
       >
         <DialogTitle>{"Reserve Your Seat"}</DialogTitle>
         <DialogContent>
-          <ReserveSeatStepper />
+          <ReserveSeatStepper
+            hostelData={hostelData}
+            handleClose={handleClose}
+          />
         </DialogContent>
       </Dialog>
     </div>

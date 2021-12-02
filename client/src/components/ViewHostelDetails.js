@@ -96,6 +96,7 @@ export default function ViewHostelDetails({ toggle, settoggle, hostelData }) {
         <StudentRegistrationForHostel
           setisRegFormOpen={setisRegFormOpen}
           isRegFormOpen={isRegFormOpen}
+          hostelData={hostelData}
         />
         <AppBar sx={{ position: "fixed" }}>
           <Toolbar>

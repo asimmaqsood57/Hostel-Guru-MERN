@@ -7,7 +7,9 @@ import Button from "@mui/material/Button";
 import Aggrement from "./Aggrement";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-
+import { useContext } from "react";
+import HostelContext from "../context/HostelContext";
+import { useState } from "react";
 const steps = [
   "Personal Information",
   "Hostel Aggrement",
@@ -15,15 +17,60 @@ const steps = [
   "Confirmation",
 ];
 
-export default function ReserveSeatStepper() {
+export default function ReserveSeatStepper({ hostelData, handleClose }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-
   const isStepOptional = (step) => {
     return step === 1;
   };
 
+  const context = useContext(HostelContext);
+
+  const { reserveYourSeatInfo } = context;
+
   const [isAgree, setisAgree] = React.useState("Agree");
+
+  const [personalInfo, setpersonalInfo] = useState({
+    firstName: "",
+    lastName: "",
+    fatherName: "",
+    cnic: "",
+    dob: "",
+    workPlace: "",
+    phone: "",
+  });
+
+  const { firstName, lastName, fatherName, cnic, dob, workPlace, phone } =
+    personalInfo;
+
+  const { hostelId, hostelOwner } = hostelData;
+  let name;
+  let value;
+  // eslint-disable-next-line
+  const handleChange = (event) => {
+    name = event.target.name;
+    value = event.target.value;
+
+    setpersonalInfo({
+      ...personalInfo,
+      [name]: event.target.value,
+    });
+  };
+
+  const sendReserveSeatInfoToDB = () => {
+    reserveYourSeatInfo(
+      firstName,
+      lastName,
+      fatherName,
+      cnic,
+      dob,
+      workPlace,
+      phone,
+      hostelId,
+      hostelOwner
+    );
+    handleNext();
+  };
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -98,6 +145,8 @@ export default function ReserveSeatStepper() {
                   sx={{ minWidth: "30rem", margin: "0.5rem" }}
                   label="First Name"
                   name="firstName"
+                  onChange={handleChange}
+                  value={personalInfo.firstName}
                   variant="outlined"
                 />
 
@@ -106,6 +155,8 @@ export default function ReserveSeatStepper() {
                   sx={{ minWidth: "30rem", margin: "0.5rem" }}
                   label="Last Name"
                   name="lastName"
+                  onChange={handleChange}
+                  value={personalInfo.lastName}
                   variant="outlined"
                 />
                 <TextField
@@ -113,6 +164,8 @@ export default function ReserveSeatStepper() {
                   sx={{ minWidth: "30rem", margin: "0.5rem" }}
                   label="Father Name"
                   name="fatherName"
+                  onChange={handleChange}
+                  value={personalInfo.fatherName}
                   variant="outlined"
                 />
                 <TextField
@@ -121,14 +174,18 @@ export default function ReserveSeatStepper() {
                   label="CNIC"
                   placeholder="XXXXX-XXXXXXX-X"
                   name="cnic"
+                  onChange={handleChange}
+                  value={personalInfo.cnic}
                   variant="outlined"
                 />
                 <TextField
                   id="standard-basic"
-                  type="date"
+                  type="text"
                   sx={{ minWidth: "30rem", margin: "0.5rem" }}
                   label="DOB"
-                  name="cnic"
+                  name="dob"
+                  value={personalInfo.dob}
+                  onChange={handleChange}
                   variant="outlined"
                 />
 
@@ -137,6 +194,8 @@ export default function ReserveSeatStepper() {
                   sx={{ minWidth: "30rem", margin: "0.5rem" }}
                   label="Work Place"
                   name="workPlace"
+                  onChange={handleChange}
+                  value={personalInfo.workPlace}
                   variant="outlined"
                 />
 
@@ -144,7 +203,9 @@ export default function ReserveSeatStepper() {
                   id="standard-basic"
                   sx={{ minWidth: "30rem", margin: "0.5rem" }}
                   label="Contact Phone"
-                  name="contactPhone"
+                  name="phone"
+                  onChange={handleChange}
+                  value={personalInfo.phone}
                   variant="outlined"
                 />
               </>
@@ -156,8 +217,10 @@ export default function ReserveSeatStepper() {
                 <br />
                 <Aggrement setisAgree={setisAgree} />
               </>
+            ) : activeStep === 2 ? (
+              "Pay your hostel Dues"
             ) : (
-              ""
+              "We have recieved your information. We will reach you soon. Thanks"
             )}
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
@@ -171,11 +234,21 @@ export default function ReserveSeatStepper() {
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
 
-            <Button onClick={handleNext}>
+            <Button
+              onClick={
+                activeStep === 2
+                  ? () => sendReserveSeatInfoToDB()
+                  : activeStep === 3
+                  ? () => handleClose()
+                  : handleNext
+              }
+            >
               {activeStep === steps.length - 1
                 ? "Finish"
                 : isAgree === "Agree"
-                ? "Next"
+                ? activeStep === 2
+                  ? "Submit"
+                  : "Next"
                 : ""}
             </Button>
           </Box>

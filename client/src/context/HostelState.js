@@ -148,6 +148,45 @@ const HostelState = (props) => {
     console.log("this hostel is upadated", result);
   };
 
+  const reserveYourSeatInfo = async (
+    firstName,
+    lastName,
+    fatherName,
+    cnic,
+    dob,
+    workPlace,
+    phone,
+    hostelId,
+    hostelOwner
+  ) => {
+    const reserveSeatInfo = {
+      firstName,
+      lastName,
+      fatherName,
+      cnic,
+      dob,
+      workPlace,
+      phone,
+      hostelId,
+      hostelOwner,
+    };
+
+    const response = await fetch(`${host}/api/hostel/reg`, {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("auth-token"),
+      },
+      body: JSON.stringify(reserveSeatInfo),
+    });
+
+    const result = await response.json();
+
+    assignhostel(hostelId);
+    console.log("this hostel is registered", result);
+  };
+
   return (
     <HostelContext.Provider
       value={{
@@ -162,6 +201,7 @@ const HostelState = (props) => {
         updateHostel,
         getAssignHostel,
         getAssignHostell, // get the return data(assign hostel store the data)
+        reserveYourSeatInfo,
       }}
     >
       {props.children}
