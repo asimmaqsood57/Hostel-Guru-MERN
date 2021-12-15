@@ -6,6 +6,8 @@ import Container from "@mui/material/Container";
 import HostelSearchBar from "./HostelSearchBar";
 import HostelContext from "../context/HostelContext";
 
+import Box from "@mui/material/Box";
+import HostelImagesSlider from "./HostelImagesSlider";
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(3),
@@ -42,6 +44,11 @@ export default function Hostels() {
     <div>
       {/* <h3>Ex 4: Responsive Material UI Grid </h3> */}
       {/* // I am a container Grid with 1 (8px) spacing */}
+
+      <Container sx={{ marginBottom: "2rem" }}>
+        <HostelImagesSlider />
+      </Container>
+
       <HostelSearchBar />
 
       <h1 style={{ textAlign: "center" }}>Hostels</h1>

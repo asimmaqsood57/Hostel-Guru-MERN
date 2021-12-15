@@ -252,17 +252,20 @@ router.get("/searchhostel/:text", async (req, res) => {
     const searchText = req.params.text;
     const hostels = await hostel.find();
 
-    let res = [];
+    let resHostelCity = [];
+    let resHostelName = [];
 
     hostels.forEach((item) => {
+      const hostelName = item.hostelName;
       if (item.hostelCity === searchText) {
-        console.log(item, searchText);
-        res = item;
+        resHostelCity.push(item);
+      } else if (hostelName.includes(searchText)) {
+        resHostelName.push(item);
       }
     });
 
-    console.log(res.length);
-    res.json({ hostels });
+    console.log(resHostelCity.length, resHostelName.length);
+    res.json({ resHostelCity, resHostelName });
   } catch (err) {
     res.send(err);
   }

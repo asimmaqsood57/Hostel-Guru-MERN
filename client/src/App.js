@@ -11,6 +11,7 @@ import HostelOwnerDashboard from "./components/HostelOwnerDashboard";
 import Footer from "./components/Footer";
 import Logout from "./components/Logout";
 import Profile from "./components/Profile";
+import HomePage from "./components/HomePage";
 function App() {
   return (
     <>
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route exact path="/Profile">
             <Profile />
+          </Route>
+          <Route exact path="/HomePage">
+            <HomePage />
           </Route>
 
           <Footer />
