@@ -204,6 +204,20 @@ const HostelState = (props) => {
     console.log("this hostel is registered", result);
   };
 
+  const remRegStudentData = async (id) => {
+    const response = await fetch(`${host}/api/hostel/remRegStudentData/${id}`, {
+      method: "DELETE",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await response.json();
+    fetchRegStudentData();
+    console.log("this hostel is removed  Successfully", result);
+  };
+
   return (
     <HostelContext.Provider
       value={{
@@ -222,6 +236,7 @@ const HostelState = (props) => {
         fetchRegStudentData,
 
         regStudentData,
+        remRegStudentData,
       }}
     >
       {props.children}

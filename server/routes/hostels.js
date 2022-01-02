@@ -51,10 +51,12 @@ router.get("/fetchRegStudentData", async (req, res) => {
 });
 router.delete("/remRegStudentData/:id", async (req, res) => {
   const id = req.params.id;
+
   const RegStudent = await studentRegInfo.findByIdAndDelete({ _id: id });
 
   console.log("hello world");
-  res.json(RegStudent);
+  console.log(hostelFind);
+  res.json({ RegStudent });
 });
 
 router.put("/updatehostel/:id", fetchUser, async (req, res) => {

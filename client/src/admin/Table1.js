@@ -9,6 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import HostelContext from "../context/HostelContext";
+import Remove from "./Remove";
 import { useContext, useEffect, useState } from "react";
 import Details from "./Details";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -38,9 +39,11 @@ function createData(name, calories, fat, carbs, protein) {
 export default function Table1() {
   const context = useContext(HostelContext);
   const [toggleDialog, settoggleDialog] = useState(false);
+  const [toggleRemDialog, settoggleRemDialog] = useState(false);
   const [rowData, setrowData] = useState({});
-  const { fetchRegStudentData, regStudentData } = context;
+  const { fetchRegStudentData, regStudentData, remRegStudentData } = context;
 
+  console.log(context);
   useEffect(() => {
     fetchRegStudentData();
     // eslint-disable-next-line
@@ -53,6 +56,12 @@ export default function Table1() {
         toggleDialog={toggleDialog}
         settoggleDialog={settoggleDialog}
         rowData={rowData}
+      />
+      <Remove
+        rowData={rowData}
+        toggleRemDialog={toggleRemDialog}
+        settoggleRemDialog={settoggleRemDialog}
+        remRegStudentData={remRegStudentData}
       />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 900 }} aria-label="customized table">
@@ -83,6 +92,9 @@ export default function Table1() {
                     variant="outlined"
                     style={{ marginLeft: "1rem" }}
                     color="error"
+                    onClick={() => {
+                      settoggleRemDialog(!toggleRemDialog);
+                    }}
                   >
                     Remove
                   </Button>

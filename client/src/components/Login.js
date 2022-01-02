@@ -253,6 +253,7 @@ export default function Login() {
         />
         <TextField
           id="outlined-basic"
+          type="email"
           style={{ width: "26rem", marginTop: "-5rem" }}
           label="email"
           value={values.email}

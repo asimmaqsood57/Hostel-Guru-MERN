@@ -3,6 +3,10 @@ import AuthContext from "./AuthContext";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 const AuthState = (props) => {
   const host = "http://localhost:3001";
   const history = useHistory();
@@ -93,11 +97,11 @@ const AuthState = (props) => {
       localStorage.setItem("category", "Student");
 
       history.push("/studentDashboard");
-    }
-    if (res.error) {
-      console.log("iscredentials correct");
-
-      history.push("/login");
+    } else {
+      toast.error("Error! Invalid Credentials.", {
+        autoClose: 20000,
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
   const hostelOwnerLogin = async (email, password) => {
@@ -117,6 +121,11 @@ const AuthState = (props) => {
       localStorage.setItem("category", "Hostel Owner");
 
       history.push("/HostelOwnerDashboard");
+    } else {
+      toast.error("Error! Invalid Credentials.", {
+        autoClose: 20000,
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
 
