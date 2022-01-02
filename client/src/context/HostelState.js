@@ -11,6 +11,7 @@ const HostelState = (props) => {
   const [singleHostelOwnerhostels, setsingleHostelOwnerhostels] = useState([]);
   const [getAssignHostell, setgetAssignHostell] = useState({});
   const [hostelIsAlreadyAssigned, sethostelIsAlreadyAssigned] = useState(false);
+  const [regStudentData, setregStudentData] = useState([]);
   const addHostel = async (
     hostelName,
     hostelAddress,
@@ -187,6 +188,22 @@ const HostelState = (props) => {
     console.log("this hostel is registered", result);
   };
 
+  const fetchRegStudentData = async () => {
+    const response = await fetch(`${host}/api/hostel/fetchRegStudentData`, {
+      method: "GET",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await response.json();
+
+    setregStudentData(result);
+
+    console.log("this hostel is registered", result);
+  };
+
   return (
     <HostelContext.Provider
       value={{
@@ -202,6 +219,9 @@ const HostelState = (props) => {
         getAssignHostel,
         getAssignHostell, // get the return data(assign hostel store the data)
         reserveYourSeatInfo,
+        fetchRegStudentData,
+
+        regStudentData,
       }}
     >
       {props.children}

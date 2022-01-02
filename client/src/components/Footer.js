@@ -12,7 +12,6 @@ export default function Footer() {
         }}
       >
         <h3>Hostel Guru | All Rights Reserved</h3>
-        <FacebookIcon sx={{ height: "0.5rem" }} />
       </Container>
     </AppBar>
   );

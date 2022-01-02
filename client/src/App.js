@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import Logout from "./components/Logout";
 import Profile from "./components/Profile";
 import HomePage from "./components/HomePage";
+import Admin from "./admin/Admin";
 function App() {
   return (
     <>
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route exact path="/HomePage">
             <HomePage />
+          </Route>
+          <Route exact path="/Admin">
+            <Admin />
           </Route>
 
           <Footer />

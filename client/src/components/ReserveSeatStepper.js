@@ -8,7 +8,14 @@ import Aggrement from "./Aggrement";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { useContext } from "react";
+import JazzCash from "../images/JazzCash.png";
+import easypaisa from "../images/easypaisa.png";
 import HostelContext from "../context/HostelContext";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 import { useState } from "react";
 const steps = [
   "Personal Information",
@@ -218,7 +225,49 @@ export default function ReserveSeatStepper({ hostelData, handleClose }) {
                 <Aggrement setisAgree={setisAgree} />
               </>
             ) : activeStep === 2 ? (
-              "Pay your hostel Dues"
+              <>
+                "Pay your hostel Dues" <br /> <br />
+                <img
+                  src={JazzCash}
+                  style={{ width: "8rem" }}
+                  alt=""
+                  srcset=""
+                />
+                <img
+                  src={easypaisa}
+                  style={{ width: "8rem", marginLeft: "3rem" }}
+                  alt=""
+                  srcset=""
+                />
+                <br />
+                <FormControl component="fieldset">
+                  <RadioGroup
+                    row
+                    aria-label="gender"
+                    name="row-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio />}
+                      label="JazzCash"
+                    />
+                    <FormControlLabel
+                      value="male"
+                      style={{ marginLeft: "3rem" }}
+                      control={<Radio />}
+                      label="Easypaisa"
+                    />
+                  </RadioGroup>
+                </FormControl>
+                <br /> <br />
+                <TextField
+                  id="outlined-basic"
+                  label="Phone"
+                  type="tel"
+                  style={{ width: "20rem" }}
+                  variant="outlined"
+                />
+              </>
             ) : (
               "We have recieved your information. We will reach you soon. Thanks"
             )}

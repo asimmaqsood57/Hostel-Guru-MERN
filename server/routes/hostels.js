@@ -43,6 +43,19 @@ router.get("/fetchhostels", async (req, res) => {
 
   res.json(hostels);
 });
+router.get("/fetchRegStudentData", async (req, res) => {
+  const RegStudents = await studentRegInfo.find();
+
+  console.log("hello world");
+  res.json(RegStudents);
+});
+router.delete("/remRegStudentData/:id", async (req, res) => {
+  const id = req.params.id;
+  const RegStudent = await studentRegInfo.findByIdAndDelete({ _id: id });
+
+  console.log("hello world");
+  res.json(RegStudent);
+});
 
 router.put("/updatehostel/:id", fetchUser, async (req, res) => {
   const hostelId = req.params.id;

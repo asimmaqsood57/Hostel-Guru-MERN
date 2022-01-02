@@ -9,29 +9,28 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-
+import img1 from "../images/hg1.jpg";
+import img2 from "../images/hg2.jpg";
+import img3 from "../images/hg3.jpg";
+import img4 from "../images/h4.jpg";
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
   {
     label: "San Francisco – Oakland Bay Bridge, United States",
-    imgPath:
-      "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
+    imgPath: img1,
   },
   {
     label: "Bird",
-    imgPath:
-      "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
+    imgPath: img2,
   },
   {
     label: "Bali, Indonesia",
-    imgPath:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80",
+    imgPath: img3,
   },
   {
     label: "Goč, Serbia",
-    imgPath:
-      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
+    imgPath: img4,
   },
 ];
 
@@ -60,7 +59,7 @@ function HostelImagesSlider() {
         sx={{
           display: "flex",
           alignItems: "center",
-          height: 60,
+          height: 50,
           pl: 2,
           bgcolor: "background.default",
         }}
@@ -79,7 +78,7 @@ function HostelImagesSlider() {
               <Box
                 component="img"
                 sx={{
-                  height: 400,
+                  height: 600,
                   display: "block",
                   Width: "70rem",
                   overflow: "hidden",
